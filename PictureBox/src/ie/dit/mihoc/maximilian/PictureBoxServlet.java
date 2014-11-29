@@ -48,6 +48,10 @@ public class PictureBoxServlet extends HttpServlet {
 		if(myPrincipal != null) 
 		{
 			emailAddress = myPrincipal.getName();
+			
+			//store the user email in session: this will be used later to know who is the user
+			req.setAttribute("user", emailAddress); 
+			
 			if(admins.contains(emailAddress.toLowerCase()))
 			{
 				resp.getWriter().println("<h3>Admin</h3>");
@@ -56,9 +60,11 @@ public class PictureBoxServlet extends HttpServlet {
 			}
 			else if(members.contains(emailAddress.toLowerCase()))
 			{
+				String memberURL = "/member";
 				resp.getWriter().println("<h3>Member</h3>");
 				resp.getWriter().println("<p>You are Logged in as (email): " + emailAddress + "</p>");
 				resp.getWriter().println("<p>You can <a href=\"" + logoutURL + "\">sign out</a>.</p>");
+				resp.getWriter().println("<p><a href=\"" + memberURL + "\">Home</a></p>");
 			}
 			else 
 			{
