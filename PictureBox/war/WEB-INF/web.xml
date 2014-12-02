@@ -12,6 +12,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Member</servlet-name>
 		<servlet-class>ie.dit.mihoc.maximilian.Member</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Upload</servlet-name>
+		<servlet-class>ie.dit.mihoc.maximilian.Upload</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>PictureBox</servlet-name>
 		<url-pattern>/picturebox</url-pattern>
@@ -19,6 +23,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>Member</servlet-name>
 		<url-pattern>/member</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Upload</servlet-name>
+		<url-pattern>/upload</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
