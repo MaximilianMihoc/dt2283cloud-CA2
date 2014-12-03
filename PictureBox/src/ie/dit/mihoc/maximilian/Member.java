@@ -45,14 +45,16 @@ public class Member extends HttpServlet
 	{	
 		//get email of the current member user
 		UserService userService = UserServiceFactory.getUserService();
-		System.out.println(userService.isUserAdmin());
-		
+		//System.out.println(userService.isUserAdmin());
 		User user = userService.getCurrentUser();
+		
+		
 		//create login and logout URL
 		String loginUrl = userService.createLoginURL("/");
 		String logoutUrl = userService.createLogoutURL("/");
 		
-		System.out.println("user: " + user.getEmail()); 
+		
+		//System.out.println("user: " + user.getEmail()); 
 		
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		//define the maximum size of Bolbs that are going to be uploaded 
