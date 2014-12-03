@@ -47,7 +47,7 @@ public class PictureBoxServlet extends HttpServlet {
 		 * put their email addresses into members array to check if they are members
 		 * if they are members, redirect them to Member.jsp page
 		 * */
-		/*
+		
 		Query q = new Query("AppUser");
 		PreparedQuery pq = ds.prepare(q);
 		Iterable<Entity> results = pq.asIterable();
@@ -58,7 +58,7 @@ public class PictureBoxServlet extends HttpServlet {
 			System.out.println("email: " + emailUsr); 
 			
 			members.add(emailUsr.toLowerCase());
-		}*/
+		}
 		
 		resp.setContentType("text/html");
 		resp.getWriter().println("<h1>Welcome to Picture Box Web Application</h1>");
