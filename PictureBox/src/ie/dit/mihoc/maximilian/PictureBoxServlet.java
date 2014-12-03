@@ -33,6 +33,7 @@ public class PictureBoxServlet extends HttpServlet {
 		//define members List
 		List<String> members = new ArrayList<String>();
 		members.add(("member@mail.com").toLowerCase());
+		members.add(("maxMember@hotmail.com").toLowerCase());
 		
 		
 		resp.setContentType("text/html");
@@ -51,13 +52,14 @@ public class PictureBoxServlet extends HttpServlet {
 			
 			//store the user email in session: this will be used later to know who is the user
 			req.setAttribute("user", emailAddress); 
-			
+			//check if email entered is the email of one of the admin users
 			if(admins.contains(emailAddress.toLowerCase()))
 			{
 				resp.getWriter().println("<h3>Admin</h3>");
 				resp.getWriter().println("<p>You are Logged in as (email): " + emailAddress + "</p>");
 				resp.getWriter().println("<p>You can <a href=\"" + logoutURL + "\">sign out</a>.</p>");
 			}
+			//check if email entered is the email of one of the member users
 			else if(members.contains(emailAddress.toLowerCase()))
 			{
 				String memberURL = "/member";
@@ -67,9 +69,12 @@ public class PictureBoxServlet extends HttpServlet {
 				resp.getWriter().println("<p><a href=\"" + memberURL + "\">Home</a></p>");
 			}
 			else 
-			{
+			{	//e-mails that are not admins or users will be guests and they will have an opportunity to register
 				resp.getWriter().println("<h3>Guest</h3>");
 				resp.getWriter().println("<p>You are not Logged in You can <a href=\"" + loginURL + "\">sign in here</a>");
+				//here should be like:
+				//Display message, You are not registered as a member, register here >> link to register << 
+				
 			}
 		}
 	}
