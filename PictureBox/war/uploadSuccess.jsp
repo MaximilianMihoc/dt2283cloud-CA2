@@ -10,6 +10,6 @@ BlobstoreServiceFactory.getBlobstoreService(); %>
  </head>
  <body>
  	<h2>File Uploaded Successfully</h2>
- 	<a href="index.jsp">Back</a>
+ 	<a href="index.html">Back</a>
  </body>
 </html>
