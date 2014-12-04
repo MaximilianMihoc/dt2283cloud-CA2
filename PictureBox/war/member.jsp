@@ -9,60 +9,124 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Member Page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Member Page</title>
+	<style>
+		#uploadDiv {
+			position: fixed;
+    		top: 40px;
+    		left: 20px;
+		}
+		
+		#privatePic, #publicPics, #otherPublicPics{
+			position: relative;
+    		margin-left: auto;
+    		margin-right: auto;
+    		width: 70%;
+		}
+	</style>
 </head>
 <body>
 <c:choose>
 	<c:when test="${user != null}">
-		<p>
-		Welcome, ${user.email}!
-		You can <a href="${logoutUrl}">sign out</a>.
-		</p>
-		<c:set var="imageIndex" value="0"/>
-		<c:choose>
-			<c:when test="${hasUploads}">
-					<table border="1" cellpadding="5" align="center">
-					<caption><h2>Your Private Pictures</h2></caption>
-						<c:forEach var="upload" items="${uploads}">
-							<td align="center" valign="center">
-								${upload.description}<br/>
-								<c:set var="imageIndex" value="${imageIndex + 1}"/>
-								
-								<a href="/view?key=${upload.uploadKey}">
-									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
-								</a><br/>
-								<form action="/delete" method="post">
-									<input type="hidden" name="delete" value="${upload.uploadKey}">
-									<input type="submit" value="Delete" />
-								</form>
-								<br/>
-							</td>
-							<c:if test="${ imageIndex % 5 == 0 }">
-								<tr></tr>
-							</c:if>
-						</c:forEach>
-					</table>
-				
-			</c:when>
-			<c:otherwise>
-				<p>You have no uploads.</p>
-			</c:otherwise>
-		</c:choose>
+		<p>Welcome, ${userName}! You can <a href="${logoutUrl}">sign out here</a>.</p>
 		
-		<form action="${uploadUrl}" method="post" enctype="multipart/form-data">
-			<label for="description">Description:</label>
-			<input type="text" name="description" id="description" /><br />
-			<label for="upload">File:</label>
-			<input type="file" name="upload" multiple="true" /><br />
-			<input type="submit" value="Upload File" />
-		</form>
+		<!-- Declare Some JSTL variables to use -->
+		<c:set var="imageIndex" value="0"/>
+		<c:set var="imageIndexPublic" value="0"/>
+		<c:set var="imageIndexOther" value="0"/>
+		
+		<!-- Member private Pictures -->
+		<table border="1" cellpadding="5" id="privatePic">
+		<caption><h2>${userName} Private Pictures</h2></caption>
+			<c:forEach var="upload" items="${uploads}">
+				<td align="center" valign="center">
+					${upload.description}<br/>
+					<c:set var="imageIndex" value="${imageIndex + 1}"/>
+					
+					<a href="/view?key=${upload.uploadKey}">
+						<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+					</a><br/>
+					<form action="/delete" method="post">
+						<input type="hidden" name="delete" value="${upload.uploadKey}">
+						<input type="submit" value="Delete" />
+					</form>
+					<br/>
+				</td>
+				<c:if test="${ imageIndex % 5 == 0 }">
+					<tr></tr>
+				</c:if>
+			</c:forEach>
+			<c:if test="${ imageIndexPublic == 0 }">
+				<tr><td>You don't have any Private Pictures</td></tr>
+			</c:if>		
+		</table>
+		
+		<!-- Member Public Pictures -->
+		<table border="1" cellpadding="5" id="publicPics">
+			<caption><h2>${userName} Public Pictures</h2></caption>
+			<c:forEach var="upload" items="${publicUploads}">
+				<c:if test="${user.email == upload.user.email }">
+					<td align="center" valign="center">
+						${upload.description}<br/>
+						<c:set var="imageIndexPublic" value="${imageIndexPublic + 1}"/>
+						
+						<a href="/view?key=${upload.uploadKey}">
+							<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+						</a><br/>
+						<form action="/delete" method="post">
+							<input type="hidden" name="delete" value="${upload.uploadKey}">
+							<input type="submit" value="Delete" />
+						</form>
+						<br/>
+					</td>
+					<c:if test="${ imageIndexPublic % 5 == 0 }">
+						<tr></tr>
+					</c:if>
+				</c:if>
+			</c:forEach>
+			<c:if test="${ imageIndexPublic == 0 }">
+				<tr><td>You don't have any Public Pictures</td></tr>
+			</c:if>
+		</table>
+			
+		<!-- Other Public Pictures -->
+		<table border="1" cellpadding="5" id="otherPublicPics">
+			<caption><h2>Other Public Pictures</h2></caption>
+			<c:forEach var="upload" items="${publicUploads}">
+				<c:if test="${user.email != upload.user.email }">
+					<td align="center" valign="center">
+						${upload.description}<br/>
+						<c:set var="imageIndexOther" value="${imageIndexOther + 1}"/>
+						
+						<a href="/view?key=${upload.uploadKey}">
+							<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+						</a><br/>
+					</td>
+					<c:if test="${ imageIndexOther % 5 == 0 }">
+						<tr></tr>
+					</c:if>
+				</c:if> 
+			</c:forEach>
+			<c:if test="${ imageIndexOther == 0 }">
+				<tr><td>There are no other Public Pictures</td></tr>
+			</c:if>
+		</table>
+			
+		<!-- Upload Part -->	
+		<div id="uploadDiv">
+			<h4 align="center">Upload</h4>
+			<form action="${uploadUrl}" method="post" enctype="multipart/form-data">
+				<label for="description">Description:</label><br />
+				<input type="text" name="description" id="description" /><br />
+				<label for="upload">File:</label><br />
+				<input type="file" name="upload" multiple="true" /><br />
+				<input type="submit" value="Upload File" />
+			</form>
+		</div>
 	</c:when>
 	<c:otherwise>
-		<p>
-		Welcome! Please
-		<a href="${loginUrl}">sign in or register</a> to upload files.
-		</p>
+		<p>Welcome! Please<a href="${loginUrl}">sign in or register</a> to upload files.</p>
 	</c:otherwise>
 </c:choose>
 </body>

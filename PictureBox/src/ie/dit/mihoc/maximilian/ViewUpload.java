@@ -38,10 +38,10 @@ public class ViewUpload extends HttpServlet
 		{
 			try {
 				userUpload = ds.get(KeyFactory.stringToKey(uploadKeyStr));
-				if (((User)userUpload.getProperty("user")).equals(user))
-				{
-					blobKey = (BlobKey)userUpload.getProperty("upload");
-				}
+				//I can choose users not to see the big version of an image if it is not theirs 
+				//comment this statement out if you would like a user to not see the big version of the public image only if it it not his 
+				//if (((User)userUpload.getProperty("user")).equals(user)) 
+				blobKey = (BlobKey)userUpload.getProperty("upload");
 			} 
 			catch (EntityNotFoundException e) 
 			{

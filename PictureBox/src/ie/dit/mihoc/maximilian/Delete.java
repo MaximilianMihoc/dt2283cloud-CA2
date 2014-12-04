@@ -55,6 +55,6 @@ public class Delete extends HttpServlet
 		// Do nothing.
 		}
 		ds.delete(keysToDelete.toArray(new Key[0]));
-		resp.sendRedirect("/");
+		resp.sendRedirect("/picturebox");
 	}
 }

@@ -38,12 +38,12 @@ public class Upload extends HttpServlet
 		
 		for (BlobKey blobKey : blobKeys) 
 		{
-			Entity userUpload = new Entity("UserUpload", userGroupKey);
+			Entity userUpload = new Entity("PublicUploads", userGroupKey);
 			userUpload.setProperty("user", user);
 			userUpload.setProperty("description", req.getParameter("description"));
 			userUpload.setProperty("upload", blobKey);
 			ds.put(userUpload);
 		}
-		res.sendRedirect("/");
+		res.sendRedirect("/picturebox");
 	}
 }
