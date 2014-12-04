@@ -11,25 +11,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Member Page</title>
-	<style>
-		#uploadDiv {
-			position: fixed;
-    		top: 40px;
-    		left: 20px;
-		}
-		
-		#privatePic, #publicPics, #otherPublicPics{
-			position: relative;
-    		margin-left: auto;
-    		margin-right: auto;
-    		width: 70%;
-		}
-		.message{
-			position: absolute;
-			top: 60px;
-    		right: 20px; 
-		}
-	</style>
+	<link href="styleSheet.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <c:choose>

@@ -94,11 +94,10 @@ public class PictureBoxServlet extends HttpServlet {
 			}
 			else 
 			{	//e-mails that are not admins or users will be guests and they will have an opportunity to register
+				String guestURL = "/guest";
 				resp.getWriter().println("<h3>Guest</h3>");
-				resp.getWriter().println("<p>You can <a href=\"" + registerURL + "\">Register here</a>");
-				//here should be like:
-				//Display message, You are not registered as a member, register here >> link to register << 
-				
+				resp.getWriter().println("<p>You can <a href=\"" + registerURL + "\">Register here</a>"); 
+				resp.getWriter().println("<p>Some Public Pictures can be found <a href=\"" + guestURL + "\">here</a>");
 			}
 		}
 	}
