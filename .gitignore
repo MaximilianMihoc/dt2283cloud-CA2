@@ -22,7 +22,7 @@ local.properties
 .loadpath
 
 *.ico
-appengine-generated/**
+appengine-generated/
 
 # External tool builders
 .externalToolBuilders/
