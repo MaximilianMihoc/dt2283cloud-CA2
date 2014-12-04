@@ -45,14 +45,16 @@ public class Member extends HttpServlet
 	{	
 		//get email of the current member user
 		UserService userService = UserServiceFactory.getUserService();
-		System.out.println(userService.isUserAdmin());
-		
+		//System.out.println(userService.isUserAdmin());
 		User user = userService.getCurrentUser();
+		
+		
 		//create login and logout URL
 		String loginUrl = userService.createLoginURL("/");
 		String logoutUrl = userService.createLogoutURL("/");
 		
-		System.out.println("user: " + user.getEmail()); 
+		
+		//System.out.println("user: " + user.getEmail()); 
 		
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		//define the maximum size of Bolbs that are going to be uploaded 
@@ -83,12 +85,46 @@ public class Member extends HttpServlet
 			uploads.add(upload);
 		}
 		
+		//create list with public Pictures
+		List<Map<String, Object>> publicUploads = new ArrayList<Map<String, Object>>();
+		
+		//create query for Public Pictures
+		Query q2 = new Query("PublicUploads");
+		//prepare query to execute and iterate through results
+		PreparedQuery pq2 = ds.prepare(q2);
+		Iterable<Entity> publicResults = pq2.asIterable();
+		for (Entity result : publicResults) 
+		{
+			Map<String, Object> upload = new HashMap<String, Object>();
+			upload.put("description", (String) result.getProperty("description"));
+			BlobKey blobKey = (BlobKey) result.getProperty("upload");
+			//store the user so You know what are the public pictures for a specific user
+			upload.put("user", result.getProperty("user"));
+			upload.put("blob", blobInfoFactory.loadBlobInfo(blobKey));
+			upload.put("blobString", blobKey.getKeyString());
+			upload.put("uploadKey", KeyFactory.keyToString(result.getKey()));
+			publicUploads.add(upload);
+		}
+		
+		//create Query that return UserName of a Member
+		Query userQuery = new Query("AppUser");
+		
+		//select * from AppUser where email = user.email;
+		userQuery.setFilter(Query.FilterOperator.EQUAL.of("email", user.getEmail()));
+		
+		PreparedQuery pqu = ds.prepare(userQuery);
+		Entity usr = pqu.asSingleEntity();
+		String userName = (String) usr.getProperty("userName");
+		
+		req.setAttribute("userName", userName);
 		req.setAttribute("user", user);
 		req.setAttribute("loginUrl", loginUrl);
 		req.setAttribute("logoutUrl", logoutUrl);
 		req.setAttribute("uploadUrl", uploadUrl);
 		req.setAttribute("uploads", uploads);
+		req.setAttribute("publicUploads", publicUploads);
 		req.setAttribute("hasUploads", !uploads.isEmpty());
+		req.setAttribute("hasPublicUploads", !publicUploads.isEmpty());
 		
 		resp.setContentType("text/html");
 		

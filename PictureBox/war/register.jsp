@@ -4,10 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Registration</title>
 </head>
-<body>
-	<h1>Here is the register Page</h1>
-
+<body align="center">
+	<h1>Here is the registration Page</h1>
+	<form action="/register" method="post">
+			<label for="userName">UserName:</label>
+			<input type="text" name="userName" id="userName" /><br />
+			<label for="email">E-mail:</label>
+			<input type="email" name="email" id="email"/><br />
+			<input type="submit" value="Register" />
+	</form>
 </body>
 </html>
