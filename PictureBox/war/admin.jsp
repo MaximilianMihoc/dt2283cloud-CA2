@@ -101,6 +101,7 @@
 										<a href="/view?key=${upload.uploadKey}">
 											<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 										</a><br/>
+										Owner: ${upload.user.email}
 										<form action="/delete" method="post">
 											<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 											<input type="hidden" name="delete" value="${upload.uploadKey}">
@@ -135,6 +136,7 @@
 								<a href="/view?key=${upload.uploadKey}">
 									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 								</a><br/>
+								Owner: ${upload.user.email}
 								<form action="/delete" method="post">
 									<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 									<input type="hidden" name="delete" value="${upload.uploadKey}">
