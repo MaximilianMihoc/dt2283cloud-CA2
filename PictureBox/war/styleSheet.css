@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 #uploadDiv {
 			position: fixed;
-    		top: 40px;
+    		top: 100px;
     		left: 20px;
 		}
 		
@@ -15,5 +15,10 @@
 .message{
 			position: absolute;
 			top: 60px;
+    		right: 20px; 
+		}
+.message2{
+			position: absolute;
+			top: 90px;
     		right: 20px; 
 		}
