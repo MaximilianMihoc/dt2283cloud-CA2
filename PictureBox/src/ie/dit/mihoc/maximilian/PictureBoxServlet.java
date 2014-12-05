@@ -61,6 +61,9 @@ public class PictureBoxServlet extends HttpServlet {
 		}
 		
 		resp.setContentType("text/html");
+		//<link href="styleSheet.css" type="text/css" rel="stylesheet" />
+		resp.getWriter().println("<head><title>Portal</title><link href=\"styleSheet.css\" type=\"text/css\" rel=\"stylesheet\" /></head>");
+		
 		resp.getWriter().println("<h1>Welcome to Picture Box Web Application</h1>");
 		
 		if(myPrincipal == null) 
@@ -79,9 +82,11 @@ public class PictureBoxServlet extends HttpServlet {
 			//check if email entered is the email of one of the admin users
 			if(admins.contains(emailAddress.toLowerCase()))
 			{
+				String adminURL = "/admin";
 				resp.getWriter().println("<h3>Admin</h3>");
 				resp.getWriter().println("<p>You are Logged in as (email): " + emailAddress + "</p>");
 				resp.getWriter().println("<p>You can <a href=\"" + logoutURL + "\">sign out</a>.</p>");
+				resp.getWriter().println("<p><a href=\"" + adminURL + "\">Admin Page</a></p>");
 			}
 			//check if email entered is the email of one of the member users
 			else if(members.contains(emailAddress.toLowerCase()))
@@ -97,6 +102,7 @@ public class PictureBoxServlet extends HttpServlet {
 				String guestURL = "/guest";
 				resp.getWriter().println("<h3>Guest</h3>");
 				resp.getWriter().println("<p>You can <a href=\"" + registerURL + "\">Register here</a>"); 
+				resp.getWriter().println("<p>You can <a href=\"" + logoutURL + "\">sign out</a>.</p>");
 				resp.getWriter().println("<p>Some Public Pictures can be found <a href=\"" + guestURL + "\">here</a>");
 			}
 		}

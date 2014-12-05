@@ -28,13 +28,11 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-public class Member extends HttpServlet
-{
-	/**
+public class Admin extends HttpServlet
+{	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("deprecation")
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{	
 		//get email of the current member user
@@ -42,13 +40,11 @@ public class Member extends HttpServlet
 		//System.out.println(userService.isUserAdmin());
 		User user = userService.getCurrentUser();
 		
-		
-		//create login and logout URL
 		String loginUrl = userService.createLoginURL("/");
 		String logoutUrl = userService.createLogoutURL("/");
 		
 		
-		//System.out.println("user: " + user.getEmail()); 
+		System.out.println("admin: " + user.getEmail()); 
 		
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		//define the maximum size of Bolbs that are going to be uploaded 
@@ -60,11 +56,8 @@ public class Member extends HttpServlet
 		BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
 		List<Map<String, Object>> uploads = new ArrayList<Map<String, Object>>();
 		
-		//create group key in order to upload private pictures in the app
-		Key userGroupKey = KeyFactory.createKey("UserUploadGroup", user.getEmail());
-		Query q = new Query("UserUpload").setAncestor(userGroupKey);
-		q.addFilter("user", Query.FilterOperator.EQUAL, user);
-		//create a query that will return files uploaded by a specific user
+		//Key userGroupKey = KeyFactory.createKey("UserUploadGroup", user.getEmail());
+		Query q = new Query("UserUpload");
 		
 		PreparedQuery pq = ds.prepare(q);
 		Iterable<Entity> results = pq.asIterable();
@@ -73,6 +66,8 @@ public class Member extends HttpServlet
 			Map<String, Object> upload = new HashMap<String, Object>();
 			upload.put("description", (String) result.getProperty("description"));
 			BlobKey blobKey = (BlobKey) result.getProperty("upload");
+			//store the user so You know what are the public pictures for a specific user
+			upload.put("user", result.getProperty("user"));
 			upload.put("blob", blobInfoFactory.loadBlobInfo(blobKey));
 			upload.put("blobString", blobKey.getKeyString());
 			upload.put("uploadKey", KeyFactory.keyToString(result.getKey()));
@@ -100,17 +95,7 @@ public class Member extends HttpServlet
 			publicUploads.add(upload);
 		}
 		
-		//create Query that return UserName of a Member
-		Query userQuery = new Query("AppUser");
-		
-		//select * from AppUser where email = user.email;
-		userQuery.setFilter(Query.FilterOperator.EQUAL.of("email", user.getEmail()));
-		
-		PreparedQuery pqu = ds.prepare(userQuery);
-		Entity usr = pqu.asSingleEntity();
-		String userName = (String) usr.getProperty("userName");
-		
-		req.setAttribute("userName", userName);
+		req.setAttribute("userName", "Admin");
 		req.setAttribute("user", user);
 		req.setAttribute("loginUrl", loginUrl);
 		req.setAttribute("logoutUrl", logoutUrl);
@@ -122,7 +107,7 @@ public class Member extends HttpServlet
 		
 		resp.setContentType("text/html");
 		
-		RequestDispatcher disp = req.getRequestDispatcher("/member.jsp");
+		RequestDispatcher disp = req.getRequestDispatcher("/admin.jsp");
 		try
 		{
 			disp.forward(req, resp);
@@ -132,5 +117,4 @@ public class Member extends HttpServlet
 			e.printStackTrace();
 		}
 	}
-
 }

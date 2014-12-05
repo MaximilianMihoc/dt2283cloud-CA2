@@ -1,6 +1,7 @@
 package ie.dit.mihoc.maximilian;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,11 @@ public class Upload extends HttpServlet
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		
+		//define admin List 
+		List<String> admins = new ArrayList<String>();
+		admins.add(("MaximiliaMihoc@gmail.com").toLowerCase());
+		admins.add(("mark.deegan@dit.ie").toLowerCase());
+		
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		BlobstoreService bs = BlobstoreServiceFactory.getBlobstoreService();
 		Map<String, List<BlobKey>> blobFields = bs.getUploads(req);
@@ -38,7 +44,13 @@ public class Upload extends HttpServlet
 		
 		for (BlobKey blobKey : blobKeys) 
 		{
-			Entity userUpload = new Entity("PublicUploads", userGroupKey);
+			Entity userUpload;
+			//create functionality that an Admin user uploads are private by default and member uploads are public by default
+			if(admins.contains(user.getEmail().toLowerCase()))
+				userUpload = new Entity("UserUpload", userGroupKey);
+			else
+				userUpload = new Entity("PublicUploads", userGroupKey);
+			
 			userUpload.setProperty("user", user);
 			userUpload.setProperty("description", req.getParameter("description"));
 			userUpload.setProperty("upload", blobKey);
