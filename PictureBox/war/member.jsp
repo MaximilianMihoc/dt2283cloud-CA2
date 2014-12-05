@@ -38,6 +38,7 @@
 								<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 							</a><br/>
 							<form action="/delete" method="post">
+								<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 								<input type="hidden" name="delete" value="${upload.uploadKey}">
 								<input type="submit" value="Delete" />
 							</form>
@@ -72,6 +73,7 @@
 									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 								</a><br/>
 								<form action="/delete" method="post">
+									<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 									<input type="hidden" name="delete" value="${upload.uploadKey}">
 									<input type="submit" value="Delete" />
 								</form>
@@ -95,10 +97,10 @@
 							<td align="center" valign="center">
 								${upload.description}<br/>
 								<c:set var="imageIndexOther" value="${imageIndexOther + 1}"/>
-								
 								<a href="/view?key=${upload.uploadKey}">
 									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 								</a><br/>
+								<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 							</td>
 							<c:if test="${ imageIndexOther % 5 == 0 }">
 								<tr></tr>

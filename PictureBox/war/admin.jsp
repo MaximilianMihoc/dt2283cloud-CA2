@@ -35,6 +35,7 @@
 									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 								</a><br/>
 								<form action="/delete" method="post">
+									<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 									<input type="hidden" name="delete" value="${upload.uploadKey}">
 									<input type="submit" value="Delete" />
 								</form>
@@ -70,6 +71,7 @@
 									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 								</a><br/>
 								<form action="/delete" method="post">
+									<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 									<input type="hidden" name="delete" value="${upload.uploadKey}">
 									<input type="submit" value="Delete" />
 								</form>
@@ -100,6 +102,7 @@
 											<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 										</a><br/>
 										<form action="/delete" method="post">
+											<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 											<input type="hidden" name="delete" value="${upload.uploadKey}">
 											<input type="submit" value="Delete" />
 										</form>
@@ -116,7 +119,7 @@
 						</table>
 					</c:when>
 				<c:otherwise>
-					<p class="message2"There are no other Private Pictures.</p>
+					<p class="message2">There are no other Private Pictures.</p>
 				</c:otherwise>
 				</c:choose>	
 					
@@ -133,6 +136,7 @@
 									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
 								</a><br/>
 								<form action="/delete" method="post">
+									<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 									<input type="hidden" name="delete" value="${upload.uploadKey}">
 									<input type="submit" value="Delete" />
 								</form>
