@@ -61,6 +61,9 @@ public class PictureBoxServlet extends HttpServlet {
 		}
 		
 		resp.setContentType("text/html");
+		//<link href="styleSheet.css" type="text/css" rel="stylesheet" />
+		resp.getWriter().println("<head><title>Portal</title><link href=\"styleSheet.css\" type=\"text/css\" rel=\"stylesheet\" /></head>");
+		
 		resp.getWriter().println("<h1>Welcome to Picture Box Web Application</h1>");
 		
 		if(myPrincipal == null) 

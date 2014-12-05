@@ -47,7 +47,7 @@
 							<tr></tr>
 						</c:if>
 					</c:forEach>
-					<c:if test="${ imageIndexPublic == 0 }">
+					<c:if test="${ imageIndex == 0 }">
 						<tr><td>You don't have any Private Pictures</td></tr>
 					</c:if>		
 				</table>
