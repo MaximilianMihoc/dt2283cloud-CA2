@@ -11,7 +11,7 @@ body{
     		left: 20px;
 		}
 		
-#privatePic, #publicPics, #otherPublicPics{
+#privatePic, #publicPics, #otherPublicPics, #othePprivatePic{
 			position: relative;
     		margin-left: auto;
     		margin-right: auto;

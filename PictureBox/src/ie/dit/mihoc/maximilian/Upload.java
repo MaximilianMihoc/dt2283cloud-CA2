@@ -60,6 +60,10 @@ public class Upload extends HttpServlet
 			userUpload.setProperty("upload", blobKey);
 			ds.put(userUpload);
 		}
-		res.sendRedirect("/picturebox");
+		
+		if(admins.contains(user.getEmail().toLowerCase()))
+			res.sendRedirect("/admin");
+		else
+			res.sendRedirect("/member");
 	}
 }

@@ -18,7 +18,7 @@
 	<c:when test="${user != null}">
 		<h1 align="center">Welcome ${userName}</h1>
 		<div id="signOutButton"><a href="${logoutUrl}" class="button big">sign out<span>You can Log out here</span></a></div>
-		<div id="imageRight"><img src="member.png" width="130px"/></div>
+		
 		
 		<!-- Declare Some JSTL variables to use -->
 		<c:set var="imageIndex" value="0"/>
@@ -55,7 +55,10 @@
 				</table>
 		</c:when>
 			<c:otherwise>
-				<p class="message">You have no Private uploads.</p>
+			<table border="1" cellpadding="5" id="privatePic">
+				<caption><h2>${userName} Private Pictures</h2></caption>
+				<tr><td>You don't have any Private Pictures</td></tr>
+			</table>
 			</c:otherwise>
 		</c:choose>
 		

@@ -13,7 +13,6 @@
 	<c:when test="${user != null}">
 		<h1 align="center">Welcome ${userName}</h1>
 		<div id="signOutButton"><a href="${logoutUrl}" class="button big">sign out<span>You can Log out here</span></a></div>
-		<div id="imageRight"><img src="Admin-Users.png" width="130px"/></div>
 		
 		<!-- Declare Some JSTL variables to use -->
 		<c:set var="imageIndex" value="0"/>
@@ -91,7 +90,7 @@
 				<!-- Other Members Private Pictures -->	
 				<c:choose>
 					<c:when test="${hasUploads}">
-						<table border="1" cellpadding="5" id="privatePic">
+						<table border="1" cellpadding="5" id="othePprivatePic">
 						<caption><h2>Other Private Pictures</h2></caption>
 							<c:forEach var="upload" items="${uploads}">
 								<c:if test="${user.email != upload.user.email }">
