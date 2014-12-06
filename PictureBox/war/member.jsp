@@ -14,10 +14,11 @@
 	<link href="styleSheet.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<h3 align="center">You are logged in as Member</h3>
 <c:choose>
 	<c:when test="${user != null}">
-		<p>Welcome, ${userName}! You can <a href="${logoutUrl}">sign out here</a>.</p>
+		<h1 align="center">Welcome ${userName}</h1>
+		<div id="signOutButton"><a href="${logoutUrl}" class="button big">sign out<span>You can Log out here</span></a></div>
+		<div id="imageRight"><img src="member.png" width="130px"/></div>
 		
 		<!-- Declare Some JSTL variables to use -->
 		<c:set var="imageIndex" value="0"/>

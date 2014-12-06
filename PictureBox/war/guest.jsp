@@ -8,11 +8,12 @@
 	<title>Guest Page</title>
 	<link href="styleSheet.css" type="text/css" rel="stylesheet" />
 </head>
-<body>
-	<h3 align="center">You are logged in as Guest</h3>
-	<p align="center">You can  
-	<a href="/register.jsp"><button type="button" id="regButton">Register</button></a>
-	Here</p>
+<body align="center">
+	<h3>You are logged in as Guest</h3> 
+	<a href="/register.jsp" class="button">Register here</a>
+	
+	<div id="imageRight"><img src="questionMk.png" width="130px"/></div>
+	<div id="imageLeft"><img src="questionMk.png" width="130px"/></div>
 	
 	<c:set var="imageIndexOther" value="0"/>
 	<c:choose>

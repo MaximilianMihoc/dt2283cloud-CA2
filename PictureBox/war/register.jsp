@@ -22,11 +22,21 @@
 <body align="center">
 	<h1>Here is the registration Page</h1>
 	<form name="myForm" action="/register" onsubmit="return validateForm();" method="post">
-			<label for="userName">UserName:</label>
-			<input type="text" name="userName" id="userName" /><br />
-			<label for="email">E-mail:</label>
-			<input type="email" name="email" id="email"/><br />
-			<input type="submit" value="Register" />
+			<table align="center">
+				<tr>
+					<td><label for="userName">UserName:</label></td>
+					<td><input type="text" name="userName" id="userName" /></td>
+				</tr>
+				<tr>
+					<td><label for="email">E-mail:</label></td>
+					<td><input type="email" name="email" id="email"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="Register" /></td>
+				</tr>
+			</table>
 	</form>
+	<br/>
+	<img src="box.png" />
 </body>
 </html>
