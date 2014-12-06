@@ -31,6 +31,10 @@ public class Upload extends HttpServlet
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		
+		String checked = "off";
+		if(req.getParameter("publicCheckbox") != null)
+			checked = (String) req.getParameter("publicCheckbox");
+		
 		//define admin List 
 		List<String> admins = new ArrayList<String>();
 		admins.add(("MaximiliaMihoc@gmail.com").toLowerCase());
@@ -46,7 +50,7 @@ public class Upload extends HttpServlet
 		{
 			Entity userUpload;
 			//create functionality that an Admin user uploads are private by default and member uploads are public by default
-			if(admins.contains(user.getEmail().toLowerCase()))
+			if(checked.equals("off"))
 				userUpload = new Entity("UserUpload", userGroupKey);
 			else
 				userUpload = new Entity("PublicUploads", userGroupKey);

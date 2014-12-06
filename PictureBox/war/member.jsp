@@ -125,6 +125,7 @@
 				<input type="text" name="description" id="description" /><br />
 				<label for="upload">File:</label><br />
 				<input type="file" name="upload" multiple="true" /><br />
+				<input type="checkbox" checked="checked" name="publicCheckbox" id="publicCheckbox">Public<br/>
 				<input type="submit" value="Upload File" />
 			</form>
 		</div>
