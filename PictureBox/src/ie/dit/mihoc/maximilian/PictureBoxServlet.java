@@ -30,6 +30,7 @@ public class PictureBoxServlet extends HttpServlet {
 		String loginURL = userService.createLoginURL(thisURL);
 		String logoutURL = userService.createLogoutURL(thisURL);
 		String registerURL = "/register.jsp";
+		String guestURL = "/guest";
 		
 		//define admin List 
 		List<String> admins = new ArrayList<String>();
@@ -38,9 +39,6 @@ public class PictureBoxServlet extends HttpServlet {
 		
 		//define members List
 		List<String> members = new ArrayList<String>();
-		//add this 2 members by default, no need to register
-		members.add(("member@mail.com").toLowerCase());
-		members.add(("maxMember@hotmail.com").toLowerCase());
 		
 		/*
 		 * Create a query that will return all users from AppUser DataStore table GAE
@@ -71,6 +69,7 @@ public class PictureBoxServlet extends HttpServlet {
 			resp.getWriter().println("<p>You are Not Logged In</p>");
 			resp.getWriter().println("<p>You can <a href=\"" + loginURL + "\">sign in here</a>.</p>");
 			resp.getWriter().println("<p>Not registred You can <a href=\"" + registerURL + "\">Register here</a>.</p>");
+			resp.getWriter().println("<p>Visit as Guest <a href=\"" + guestURL + "\">here</a>");
 		} 
 		
 		if(myPrincipal != null) 
@@ -99,7 +98,6 @@ public class PictureBoxServlet extends HttpServlet {
 			}
 			else 
 			{	//e-mails that are not admins or users will be guests and they will have an opportunity to register
-				String guestURL = "/guest";
 				resp.getWriter().println("<h3>Guest</h3>");
 				resp.getWriter().println("<p>You can <a href=\"" + registerURL + "\">Register here</a>"); 
 				resp.getWriter().println("<p>You can <a href=\"" + logoutURL + "\">sign out</a>.</p>");
