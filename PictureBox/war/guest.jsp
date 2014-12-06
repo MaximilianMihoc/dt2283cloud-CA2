@@ -18,7 +18,7 @@
 	<c:choose>
 		<c:when test="${hasPublicUploads}">
 		<table border="1" cellpadding="5" id="otherPublicPics">
-			<caption><h2>Other Public Pictures</h2></caption>
+			<caption><h2>Some Public Pictures</h2></caption>
 			<c:forEach var="upload" items="${publicUploads}">
 				<td align="center" valign="center">
 					${upload.description}<br/>
