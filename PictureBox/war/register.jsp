@@ -6,10 +6,22 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Registration</title>
 	<link href="styleSheet.css" type="text/css" rel="stylesheet" />
+	<script>
+	function validateForm() {
+	    var x = document.forms["myForm"]["email"].value;
+	    var atpos = x.indexOf("@");
+	    var dotpos = x.lastIndexOf(".");
+	    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+	        alert("Not a valid e-mail address");
+	        return false;
+	    }
+	}
+	</script>
+	
 </head>
 <body align="center">
 	<h1>Here is the registration Page</h1>
-	<form action="/register" method="post">
+	<form name="myForm" action="/register" onsubmit="return validateForm();" method="post">
 			<label for="userName">UserName:</label>
 			<input type="text" name="userName" id="userName" /><br />
 			<label for="email">E-mail:</label>
