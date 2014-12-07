@@ -106,6 +106,7 @@ public class PictureBoxServlet extends HttpServlet {
 						+ "<br/>5. Under each picture you will see the owner of it"
 						+ "<br/>6. When uploading a picture, it will be private by default, but you cand choose to make it public"
 						+ "</p></div>");
+				resp.getWriter().println("<br/>");
 			}
 			//check if email entered is the email of one of the member users
 			else if(members.contains(emailAddress.toLowerCase()))
@@ -127,6 +128,7 @@ public class PictureBoxServlet extends HttpServlet {
 						+ "<br/> your pictures, public or private"
 						+ "<br/>3. You can also download any picture you like, your private or any public"
 						+ "</p></div>");
+				resp.getWriter().println("<br/>");
 			}
 			else 
 			{	//e-mails that are not admins or users will be guests and they will have an opportunity to register
@@ -143,6 +145,7 @@ public class PictureBoxServlet extends HttpServlet {
 						+ "<br/>If you would like to be a member register and you will be able to "
 						+ "<br/> upload private or public pictures and share them with other people"
 						+ "</p></div>");
+				resp.getWriter().println("<br/>");
 			}
 		}
 		resp.getWriter().println("<img src=\"box.png\" />");
