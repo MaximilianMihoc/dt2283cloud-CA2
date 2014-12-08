@@ -43,8 +43,7 @@ public class Admin extends HttpServlet
 		String loginUrl = userService.createLoginURL("/");
 		String logoutUrl = userService.createLogoutURL("/");
 		
-		
-		System.out.println("admin: " + user.getEmail()); 
+		//System.out.println("admin: " + user.getEmail()); 
 		
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		//define the maximum size of Bolbs that are going to be uploaded 
@@ -54,6 +53,8 @@ public class Admin extends HttpServlet
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		//get blob info factory informations 
 		BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+		
+		//this will create a list of maps, each map will contain informations about a blob that is going to be retrieved from GAE datastore, from User Uppload Kind 
 		List<Map<String, Object>> uploads = new ArrayList<Map<String, Object>>();
 		
 		//Key userGroupKey = KeyFactory.createKey("UserUploadGroup", user.getEmail());
@@ -63,6 +64,9 @@ public class Admin extends HttpServlet
 		Iterable<Entity> results = pq.asIterable();
 		for (Entity result : results) 
 		{
+			/*
+			 * create a map to store all the informations about a blob which was just returned from GAE datastore
+			 * */
 			Map<String, Object> upload = new HashMap<String, Object>();
 			upload.put("description", (String) result.getProperty("description"));
 			BlobKey blobKey = (BlobKey) result.getProperty("upload");
@@ -74,7 +78,7 @@ public class Admin extends HttpServlet
 			uploads.add(upload);
 		}
 		
-		//create list with public Pictures
+		//create list of maps, with public Pictures
 		List<Map<String, Object>> publicUploads = new ArrayList<Map<String, Object>>();
 		
 		//create query for Public Pictures

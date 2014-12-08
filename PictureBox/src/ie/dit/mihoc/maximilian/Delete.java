@@ -42,17 +42,15 @@ public class Delete extends HttpServlet
 		try 
 		{
 			Entity userUpload = ds.get(KeyFactory.stringToKey(uploadKeyString));
-			//if (((User)userUpload.getProperty("user")).equals(user)) 
-			//{
-				BlobKey blobKey = (BlobKey)userUpload.getProperty("upload");
-				Key blobInfoKey = KeyFactory.createKey(BlobInfoFactory.KIND, blobKey.getKeyString());
-				keysToDelete.add(blobInfoKey);
-				keysToDelete.add(userUpload.getKey());
-			//}
+			
+			BlobKey blobKey = (BlobKey)userUpload.getProperty("upload");
+			Key blobInfoKey = KeyFactory.createKey(BlobInfoFactory.KIND, blobKey.getKeyString());
+			keysToDelete.add(blobInfoKey);
+			keysToDelete.add(userUpload.getKey());
+			
 		} 
 		catch (EntityNotFoundException e) 
 		{
-		// Do nothing.
 		}
 		ds.delete(keysToDelete.toArray(new Key[0]));
 		resp.sendRedirect("/picturebox");

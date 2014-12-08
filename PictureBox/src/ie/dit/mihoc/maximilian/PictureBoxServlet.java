@@ -53,8 +53,6 @@ public class PictureBoxServlet extends HttpServlet {
 		{
 			String emailUsr = (String) result.getProperty("email");
 			
-			System.out.println("email: " + emailUsr); 
-			
 			members.add(emailUsr.toLowerCase());
 		}
 		

@@ -47,9 +47,6 @@ public class Member extends HttpServlet
 		String loginUrl = userService.createLoginURL("/");
 		String logoutUrl = userService.createLogoutURL("/");
 		
-		
-		//System.out.println("user: " + user.getEmail()); 
-		
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		//define the maximum size of Bolbs that are going to be uploaded 
 		UploadOptions uploadOptions = UploadOptions.Builder.withMaxUploadSizeBytesPerBlob(1024L * 1024L * 1024L).maxUploadSizeBytes(10L * 1024L * 1024L * 1024L);

@@ -27,8 +27,6 @@ public class Register extends HttpServlet
 		String userName = (String) req.getParameter("userName");
 		String email = (String) req.getParameter("email");
 		
-		//System.out.println("usrName: " + userName + "\nemail: " + email); 
-		
 		//check if user already in database
 		//when a user tries to register, if his email is already in the 
 		//database he will see his page without having to register again
@@ -52,6 +50,6 @@ public class Register extends HttpServlet
 			usr.setProperty("email", email);
 			ds.put(usr);
 		}
-		resp.sendRedirect("/member");
+		resp.sendRedirect("/picturebox");
 	}
 }
