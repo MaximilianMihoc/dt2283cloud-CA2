@@ -32,7 +32,7 @@
 								<c:set var="imageIndex" value="${imageIndex + 1}"/>
 								
 								<a href="/view?key=${upload.uploadKey}">
-									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+									<img src="/serve?blob-key=${upload.blobString}" width="150">
 								</a><br/>
 								<form action="/delete" method="post">
 									<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
@@ -68,7 +68,7 @@
 								<c:set var="imageIndexPublic" value="${imageIndexPublic + 1}"/>
 								
 								<a href="/view?key=${upload.uploadKey}">
-									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+									<img src="/serve?blob-key=${upload.blobString}" width="150">
 								</a><br/>
 								<form action="/delete" method="post">
 									<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
@@ -99,7 +99,7 @@
 										<c:set var="imageIndexPrivate" value="${imageIndexPrivate + 1}"/>
 										
 										<a href="/view?key=${upload.uploadKey}">
-											<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+											<img src="/serve?blob-key=${upload.blobString}" width="150">
 										</a><br/>
 										Owner: ${upload.user.email}
 										<form action="/delete" method="post">
@@ -134,7 +134,7 @@
 								<c:set var="imageIndexOther" value="${imageIndexOther + 1}"/>
 								
 								<a href="/view?key=${upload.uploadKey}">
-									<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+									<img src="/serve?blob-key=${upload.blobString}" width="150">
 								</a><br/>
 								Owner: ${upload.user.email}
 								<form action="/delete" method="post">

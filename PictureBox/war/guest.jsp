@@ -26,7 +26,7 @@
 					<c:set var="imageIndexOther" value="${imageIndexOther + 1}"/>
 					
 					<a href="/view?key=${upload.uploadKey}">
-						<img src="/serve?blob-key=${upload.blobString}" height="150" width="150">
+						<img src="/serve?blob-key=${upload.blobString}" width="150">
 					</a><br/>
 					<a href="/serve?blob-key=${upload.blobString}"><button type="button">Download</button></a>
 				</td>
