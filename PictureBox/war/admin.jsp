@@ -155,7 +155,7 @@
 				</table>
 		</c:when>
 			<c:otherwise>
-				<p class="message">There are no Public uploads.</p>
+				<p class="message2">There are no Public uploads.</p>
 			</c:otherwise>
 		</c:choose>
 			
